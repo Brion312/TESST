@@ -1903,7 +1903,10 @@ local Stats = Window:Tab({
     Text = "Stats Checker"
 })
 
-Tab:Select()
+Main:Select()
+Lobby:Select()
+Button:Select()
+Stats:Select()
 
 local Farm = Main:Section({
     Text = "Farm"
