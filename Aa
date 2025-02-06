@@ -124,41 +124,29 @@ dText.Parent = dMain
     
 makefolder("Xoura")
     
-local Circle = request({Url = "https://raw.githubusercontent.com/Rain-Design/Icons/main/Circle.png", Method = "GET"})
-writefile("Xoura/Circle.png", Circle.Body)
-dText.Text = "Downloaded: Circle.png"
-    
-local ColorDropper = request({Url = "https://raw.githubusercontent.com/Rain-Design/Icons/main/ColorDropper.png", Method = "GET"})
-writefile("Xoura/ColorDropper.png", ColorDropper.Body)
-dText.Text = "Downloaded: ColorDropper.png"
-
-local Close = request({Url = "https://raw.githubusercontent.com/Rain-Design/Icons/main/Close.png", Method = "GET"})
-writefile("Xoura/Close.png", Close.Body)
-dText.Text = "Downloaded: Close.png"
-
-local CollapseArrow = request({Url = "https://raw.githubusercontent.com/Rain-Design/Icons/main/CollapseArrow.png", Method = "GET"})
-writefile("Xoura/CollapseArrow.png", CollapseArrow.Body)
-dText.Text = "Downloaded: CollapseArrow.png"
-    
-local RadioButton = request({Url = "https://raw.githubusercontent.com/Rain-Design/Icons/main/RadioButton.png", Method = "GET"})
-writefile("Xoura/RadioButton.png", RadioButton.Body)
-dText.Text = "Downloaded: RadioButton.png"
-    
-local RadioOuter = request({Url = "https://raw.githubusercontent.com/Rain-Design/Icons/main/RadioOuter.png", Method = "GET"})
-writefile("Xoura/RadioOuter.png", RadioOuter.Body)
-dText.Text = "Downloaded: RadioOuter.png"
-    
-local RadioInner = request({Url = "https://raw.githubusercontent.com/Rain-Design/Icons/main/RadioInner.png", Method = "GET"})
-writefile("Xoura/RadioInner.png", RadioInner.Body)
-dText.Text = "Downloaded: RadioInner.png"
-
-download:Destroy()
+local function downloadAsset(url, filename)
+    local response = request({ Url = url, Method = "GET" })
+    if response and response.StatusCode == 200 then
+        writefile("Xoura/" .. filename, response.Body)
+    else
+        warn("Failed to download asset:", filename)
+    end
 end
 
+downloadAsset("https://raw.githubusercontent.com/Rain-Design/Icons/main/Circle.png", "Circle.png")
+downloadAsset("https://raw.githubusercontent.com/Rain-Design/Icons/main/ColorDropper.png", "ColorDropper.png")
+downloadAsset("https://raw.githubusercontent.com/Rain-Design/Icons/main/Close.png", "Close.png")
+downloadAsset("https://raw.githubusercontent.com/Rain-Design/Icons/main/CollapseArrow.png", "CollapseArrow.png")
+downloadAsset("https://raw.githubusercontent.com/Rain-Design/Icons/main/RadioButton.png", "RadioButton.png")
+downloadAsset("https://raw.githubusercontent.com/Rain-Design/Icons/main/RadioOuter.png", "RadioOuter.png")
+downloadAsset("https://raw.githubusercontent.com/Rain-Design/Icons/main/RadioInner.png", "RadioInner.png")
+
 function library:GetXY(GuiObject)
-	local Max, May = GuiObject.AbsoluteSize.X, GuiObject.AbsoluteSize.Y
-	local Px, Py = math.clamp(Mouse.X - GuiObject.AbsolutePosition.X, 0, Max), math.clamp(Mouse.Y - GuiObject.AbsolutePosition.Y, 0, May)
-	return Px/Max, Py/May
+    local Max, May = GuiObject.AbsoluteSize.X, GuiObject.AbsoluteSize.Y
+    local Px = math.clamp(Mouse.X - GuiObject.AbsolutePosition.X, 0, Max)
+    local Py = math.clamp(Mouse.Y - GuiObject.AbsolutePosition.Y, 0, May)
+    return Px / Max, Py / May
+    end
 end
 
 function library:Window(Info)
