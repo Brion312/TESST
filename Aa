@@ -1891,20 +1891,6 @@ function SaveManager:Save(config)
     end
 end
 
-local config = SaveManager:Load()
-
-config.Tween = config.Tween or false
-config.Fast = config.Fast or false
-config.Raid = config.Raid or false
-config.Escape = config.Escape or false
-config.Reload = config.Reload or false
-config.Die = config.Die or false
-config.Chest = config.Chest or false
-config.FastExe = config.FastExe or false
-config.Webhook = config.Webhook or ""
-config.Enhance = config.Enhance or false
-
-
 local Window = library:Window({
     Text = "Xoura Hub"
 })
@@ -1960,6 +1946,21 @@ local AttackSerumLabel = StatsSection:Label({ Text = "Attack Serum: Loading..." 
 local ShadowbanLabel = ShadowbanSection:Label({
     Text = "ShadowBanned: Checking..."
 })
+
+
+local config = SaveManager:Load()
+
+config.Tween = config.Tween or false
+config.Fast = config.Fast or false
+config.Raid = config.Raid or false
+config.Escape = config.Escape or false
+config.Reload = config.Reload or false
+config.Die = config.Die or false
+config.Chest = config.Chest or false
+config.FastExe = config.FastExe or false
+config.Webhook = config.Webhook or ""
+config.Enhance = config.Enhance or false
+
 
 Farm:Toggle({
     Text = "Tween",
